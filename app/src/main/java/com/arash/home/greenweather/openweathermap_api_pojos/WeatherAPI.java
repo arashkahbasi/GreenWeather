@@ -4,30 +4,23 @@ package com.arash.home.greenweather.openweathermap_api_pojos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class WeatherAPI {
 
-    @SerializedName("message")
-    @Expose
-    private String message;
     @SerializedName("cod")
     @Expose
     private String cod;
-    @SerializedName("count")
+    @SerializedName("message")
     @Expose
-    private int count;
+    private Double message;
+    @SerializedName("cnt")
+    @Expose
+    private Integer cnt;
     @SerializedName("list")
     @Expose
-    private List<Day> day;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    private java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> list = null;
+    @SerializedName("city")
+    @Expose
+    private City city;
 
     public String getCod() {
         return cod;
@@ -37,20 +30,36 @@ public class WeatherAPI {
         this.cod = cod;
     }
 
-    public int getCount() {
-        return count;
+    public Double getMessage() {
+        return message;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setMessage(Double message) {
+        this.message = message;
     }
 
-    public List<Day> getDay() {
-        return day;
+    public Integer getCnt() {
+        return cnt;
     }
 
-    public void setDay(List<Day> day) {
-        this.day = day;
+    public void setCnt(Integer cnt) {
+        this.cnt = cnt;
+    }
+
+    public java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> getList() {
+        return list;
+    }
+
+    public void setList(java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> list) {
+        this.list = list;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
 }

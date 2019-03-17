@@ -25,7 +25,7 @@
         android:layout_gravity="center"
         android:paddingTop="10dp"
         android:textColor="@android:color/white"
-        android:textSize="60sp" />
+        android:textSize="40sp" />
 
 
 </LinearLayout>

@@ -12,12 +12,12 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/cityNameDemo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="200dp"
-            android:text="Tehran"
             android:textColor="@android:color/white"
             android:textSize="50sp" />
 
@@ -29,7 +29,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="300dp"
             android:textColor="@android:color/white"
-            android:textSize="100sp" />
+            android:textSize="70sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_forecast"
@@ -53,16 +53,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:entries="@array/unit_arrays"
-            android:prompt="@string/unit_prompt"/>
+            android:prompt="@string/unit_prompt" />
 
-        <Spinner
-            android:id="@+id/spinnerLocation"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edttxtCity"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:entries="@array/city_arrays"
-            android:prompt="@string/city_prompt" />
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

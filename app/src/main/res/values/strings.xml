@@ -12,6 +12,15 @@
         <item>Delhi</item>
         <item>Berlin</item>
         <item>Rio de Janeiro</item>
+        <item>Beijing</item>
+        <item>Paris</item>
+        <item>Moscow</item>
+        <item>Johannesburg</item>
+        <item>Berlin</item>
+        <item>Sydney</item>
+        <item>Kuala Lumpur</item>
+        <item>Mexico City</item>
+        <item>Lagos</item>
     </string-array>
     <string-array name="unit_arrays">
         <item>Celsius</item>
