@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Green Weather</string>
+    <string name="city_prompt">Choose a City</string>
+    <string name="unit_prompt">Choose a Preferred Unit</string>
+
+    <string-array name="city_arrays">
+        <item>Tehran</item>
+        <item>London</item>
+        <item>New York</item>
+        <item>Tokyo</item>
+        <item>Istanbul</item>
+        <item>Delhi</item>
+        <item>Berlin</item>
+        <item>Rio de Janeiro</item>
+    </string-array>
+    <string-array name="unit_arrays">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
 </resources>
