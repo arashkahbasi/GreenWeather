@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     static String cityName;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -49,18 +49,19 @@ public class MainActivity extends AppCompatActivity {
             cityName = Hawk.get("city");
         }
 
+
         btnCitySelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Hawk.put("city", edttxtCity.getText().toString());
                 cityName = edttxtCity.getText().toString();
+                MainActivity.this.recreate();
             }
         });
 
         cityNameDemo.setText(cityName);
 
         final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=a66afa073601d5015bd14559a262fff5&units=" + unit;
-//                String.format(Locale.getDefault(), "https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=a66afa073601d5015bd14559a262fff5&units=metric", cityName);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(openWeatherMapAPIURL, new JsonHttpResponseHandler() {
@@ -100,20 +101,35 @@ public class MainActivity extends AppCompatActivity {
         final TextView fahText = findViewById(R.id.fahrenheit);
         final Drawable unitBack = getResources().getDrawable(R.drawable.unit_background_shape);
 
+        if (Hawk.get("unit") == null) {
+            Hawk.put("unit", "metric");
+            unit = "metric";
+        } else {
+            unit = Hawk.get("unit");
+        }
+
+        if (unit.equals("imperial")) {
+            fahText.setBackground(unitBack);
+            celText.setBackground(null);
+        } else {
+            celText.setBackground(unitBack);
+            fahText.setBackground(null);
+        }
+
         fahText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fahText.setBackground(unitBack);
-                celText.setBackground(null);
                 unit = "imperial";
+                Hawk.put("unit", "imperial");
+                MainActivity.this.recreate();
             }
         });
         celText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                celText.setBackground(unitBack);
-                fahText.setBackground(null);
                 unit = "metric";
+                Hawk.put("unit", "metric");
+                MainActivity.this.recreate();
             }
         });
     }
