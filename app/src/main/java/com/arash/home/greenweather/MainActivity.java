@@ -5,13 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cz.msebera.android.httpclient.Header;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.arash.home.greenweather.openweathermap_api_pojos.WeatherAPI;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.orhanobut.hawk.Hawk;
 
 import org.json.JSONObject;
 
@@ -19,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+
+    static String unit;
+    static String cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,20 +36,20 @@ public class MainActivity extends AppCompatActivity {
         TextView cityNameDemo = findViewById(R.id.cityNameDemo);
 
         final ArrayList<String> weekDaysTemp = new ArrayList<>();
-        String cityName;
 
-//        EditText edttxtCity = findViewById(R.id.edttxtCity);
-//
-//        if (edttxtCity.getText() != null) {
-//            cityName = edttxtCity.getText().toString();
-//        } else {
-//            cityName = "Tehran";
-//        }
+        EditText edttxtCity = findViewById(R.id.edttxtCity);
 
-        cityName = "Tehran";
+        Hawk.init(this).build();
+        if (edttxtCity.getText() != null) {
+            cityName = edttxtCity.getText().toString();
+        } else {
+            cityName = "Tehran";
+        }
+//        cityName = "Tehran";
         cityNameDemo.setText(cityName);
 
-        final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=a66afa073601d5015bd14559a262fff5&units=metric";
+        final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=Tehran&appid=a66afa073601d5015bd14559a262fff5&units=metric";
+//                String.format(Locale.getDefault(), "https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=a66afa073601d5015bd14559a262fff5&units=metric", cityName);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(openWeatherMapAPIURL, new JsonHttpResponseHandler() {
@@ -63,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     weekDaysTemp.add(weekDayTemp);
                 }
 
+
             }
 
             @Override
@@ -75,5 +83,27 @@ public class MainActivity extends AppCompatActivity {
         ForecastRecyclerAdaptor adaptor = new ForecastRecyclerAdaptor(weekDaysTemp);
         recycler.setAdapter(adaptor);
         recycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
+
+        final TextView celText = findViewById(R.id.celsius);
+        final TextView fahText = findViewById(R.id.fahrenheit);
+        final Drawable unitBack = getResources().getDrawable(R.drawable.unit_background_shape);
+
+        fahText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fahText.setBackground(unitBack);
+                celText.setBackground(null);
+                unit = "imperial";
+            }
+        });
+        celText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                celText.setBackground(unitBack);
+                fahText.setBackground(null);
+                unit = "metric";
+            }
+        });
     }
 }
