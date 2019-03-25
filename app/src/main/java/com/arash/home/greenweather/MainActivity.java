@@ -8,6 +8,7 @@ import cz.msebera.android.httpclient.Header;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,18 +38,28 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<String> weekDaysTemp = new ArrayList<>();
 
-        EditText edttxtCity = findViewById(R.id.edttxtCity);
-
+        final EditText edttxtCity = findViewById(R.id.edttxtCity);
+        Button btnCitySelect = findViewById(R.id.btnCitySelect);
         Hawk.init(this).build();
-        if (edttxtCity.getText() != null) {
-            cityName = edttxtCity.getText().toString();
-        } else {
+
+        if (Hawk.get("city") == null) {
+            Hawk.put("city", "Tehran");
             cityName = "Tehran";
+        } else {
+            cityName = Hawk.get("city");
         }
-//        cityName = "Tehran";
+
+        btnCitySelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Hawk.put("city", edttxtCity.getText().toString());
+                cityName = edttxtCity.getText().toString();
+            }
+        });
+
         cityNameDemo.setText(cityName);
 
-        final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=Tehran&appid=a66afa073601d5015bd14559a262fff5&units=metric";
+        final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=a66afa073601d5015bd14559a262fff5&units=" + unit;
 //                String.format(Locale.getDefault(), "https://api.openweathermap.org/data/2.5/forecast?q=%s&appid=a66afa073601d5015bd14559a262fff5&units=metric", cityName);
 
         AsyncHttpClient client = new AsyncHttpClient();
