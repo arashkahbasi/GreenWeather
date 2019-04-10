@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import cz.msebera.android.httpclient.Header;
 
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -139,5 +141,20 @@ public class MainActivity extends AppCompatActivity {
         ForecastRecyclerAdaptor adaptor = new ForecastRecyclerAdaptor(weekDaysTemp);
         recycler.setAdapter(adaptor);
         recycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
+        Log.d("Activity", "Created");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("Activity", "Started");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Activity", "Resumed");
     }
 }
