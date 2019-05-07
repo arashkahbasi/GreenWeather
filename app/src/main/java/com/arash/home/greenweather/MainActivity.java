@@ -100,20 +100,11 @@ public class MainActivity extends AppCompatActivity {
 
         cityNameDemo.setText(cityName);
 
-        final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=a66afa073601d5015bd14559a262fff5&units=" + unit;
+        WeatherAPIStatus weatherAPIStatus = new WeatherAPIStatus(this, cityName, unit);
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(openWeatherMapAPIURL, new JsonHttpResponseHandler() {
+        weatherAPIStatus.getWeatherStatus(new WeatherAPIStatus.WeatherStatus() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                String json = response.toString();
-
-                System.out.println(json);
-
-                Gson gson = new Gson();
-                WeatherAPI weatherAPI = gson.fromJson(json, WeatherAPI.class);
-
+            public void onWeatherStatus(WeatherAPI weatherAPI) {
                 String unitSymbol;
                 if (unit.equals("metric")) {
                     unitSymbol = "°C";
@@ -130,12 +121,44 @@ public class MainActivity extends AppCompatActivity {
                     weekDaysTemp.add(weekDayTemp);
                 }
             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
         });
+
+//        final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=a66afa073601d5015bd14559a262fff5&units=" + unit;
+//
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.get(openWeatherMapAPIURL, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                super.onSuccess(statusCode, headers, response);
+//                String json = response.toString();
+//
+//                System.out.println(json);
+//
+//                Gson gson = new Gson();
+//                WeatherAPI weatherAPI = gson.fromJson(json, WeatherAPI.class);
+//
+//                String unitSymbol;
+//                if (unit.equals("metric")) {
+//                    unitSymbol = "°C";
+//                } else {
+//                    unitSymbol = "°F";
+//                }
+//
+//                java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> list = weatherAPI.getList();
+//                String todayTemp = String.format(Locale.getDefault(), "%.1f %s", list.get(0).getMain().getTemp(), unitSymbol);
+//                todaysTemp.setText(todayTemp);
+//
+//                for (int i = 0; i < list.size(); i += 8) {
+//                    String weekDayTemp = String.format(Locale.getDefault(), "%.1f %s", list.get(i).getMain().getTemp(), unitSymbol);
+//                    weekDaysTemp.add(weekDayTemp);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                super.onFailure(statusCode, headers, throwable, errorResponse);
+//            }
+//        });
 
         RecyclerView recycler = findViewById(R.id.recycler_forecast);
         ForecastRecyclerAdaptor adaptor = new ForecastRecyclerAdaptor(weekDaysTemp);
