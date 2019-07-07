@@ -4,45 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background_land"
-    tools:context=".MainActivity">
+    android:background="@drawable/app_background"
+    tools:context=".WeatherHomeActivity">
+    <!--tools:openDrawer="left"-->
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/cityNameDemo"
+            android:id="@+id/tv_city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="160dp"
+            android:text="Tehran"
             android:textColor="@android:color/white"
-            android:textSize="50sp" />
+            android:textSize="50sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.024"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.446" />
 
         <TextView
-            android:id="@+id/todaysTemp"
+            android:id="@+id/tv_todays_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="260dp"
+            android:text="23°C"
             android:textColor="@android:color/white"
-            android:textSize="70sp" />
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.023"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_city_name"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_toEndOf="@+id/todaysTemp"
-            android:layout_alignParentRight="true"
             android:id="@+id/recycler_forecast"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="@dimen/_140sdp"
             android:layout_alignParentBottom="true"
-            android:background="#00FFFFFF" />
-    </RelativeLayout>
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+             />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="270dp"
+        android:layout_width="@dimen/_270sdp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:background="@android:color/white"

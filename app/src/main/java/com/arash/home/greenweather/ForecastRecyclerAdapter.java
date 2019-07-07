@@ -14,10 +14,13 @@ import java.util.Locale;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ForecastRecyclerAdaptor extends RecyclerView.Adapter<ForecastRecyclerAdaptor.ForecastViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ForecastRecyclerAdapter extends RecyclerView.Adapter<ForecastRecyclerAdapter.ForecastViewHolder> {
     private ArrayList<String> weekDayTemp;
 
-    ForecastRecyclerAdaptor(ArrayList<String> weekDayTemp) {
+    ForecastRecyclerAdapter(ArrayList<String> weekDayTemp) {
         this.weekDayTemp = weekDayTemp;
     }
 
@@ -33,7 +36,7 @@ public class ForecastRecyclerAdaptor extends RecyclerView.Adapter<ForecastRecycl
     public void onBindViewHolder(@NonNull ForecastViewHolder holder, int position) {
         holder.txtTemp.setText(weekDayTemp.get(position));
 
-        holder.txtDay.setText(new SimpleDateFormat("EEEE", Locale.US).format(new Date(((Calendar.getInstance().getTime()).getTime() + (position * 86400000)))));
+        holder.txtDaysName.setText(new SimpleDateFormat("EEEE", Locale.US).format(new Date(((Calendar.getInstance().getTime()).getTime() + (position * 86400000)))));
     }
 
     @Override
@@ -42,12 +45,15 @@ public class ForecastRecyclerAdaptor extends RecyclerView.Adapter<ForecastRecycl
     }
 
     class ForecastViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTemp, txtDay;
+
+        @BindView(R.id.tv_days_name)
+        TextView txtTemp;
+        @BindView(R.id.tv_days_name)
+        TextView txtDaysName;
 
         public ForecastViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtTemp = itemView.findViewById(R.id.txtTemp);
-            txtDay = itemView.findViewById(R.id.txtDay);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

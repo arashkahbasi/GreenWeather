@@ -3,9 +3,7 @@ package com.arash.home.greenweather;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import cz.msebera.android.httpclient.Header;
 
-import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,28 +13,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.arash.home.greenweather.openweathermap_api_pojos.WeatherAPI;
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.orhanobut.hawk.Hawk;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class WeatherHomeActivity extends AppCompatActivity {
 
     static String unit;
     static String cityName;
 
+    @BindView(R.id.tv_city_name)
+    TextView tvCityName;
+    @BindView(R.id.recycler_forecast)
+    RecyclerView recyclerForcast;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_weather_home);
 
-        final TextView todaysTemp = findViewById(R.id.todaysTemp);
-        TextView cityNameDemo = findViewById(R.id.cityNameDemo);
+        ButterKnife.bind(this);
+        final TextView todaysTemp = findViewById(R.id.tv_todays_temp);
 
         final ArrayList<String> weekDaysTemp = new ArrayList<>();
 
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 unit = "imperial";
                 Hawk.put("unit", "imperial");
-                MainActivity.this.recreate();
+                WeatherHomeActivity.this.recreate();
             }
         });
         celText.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 unit = "metric";
                 Hawk.put("unit", "metric");
-                MainActivity.this.recreate();
+                WeatherHomeActivity.this.recreate();
             }
         });
 
@@ -94,11 +95,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Hawk.put("city", edttxtCity.getText().toString());
                 cityName = edttxtCity.getText().toString();
-                MainActivity.this.recreate();
+                WeatherHomeActivity.this.recreate();
             }
         });
 
-        cityNameDemo.setText(cityName);
+        tvCityName.setText(cityName);
 
         WeatherAPIStatus weatherAPIStatus = new WeatherAPIStatus(this, cityName, unit);
 
@@ -123,61 +124,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        final String openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=a66afa073601d5015bd14559a262fff5&units=" + unit;
-//
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        client.get(openWeatherMapAPIURL, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                super.onSuccess(statusCode, headers, response);
-//                String json = response.toString();
-//
-//                System.out.println(json);
-//
-//                Gson gson = new Gson();
-//                WeatherAPI weatherAPI = gson.fromJson(json, WeatherAPI.class);
-//
-//                String unitSymbol;
-//                if (unit.equals("metric")) {
-//                    unitSymbol = "°C";
-//                } else {
-//                    unitSymbol = "°F";
-//                }
-//
-//                java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> list = weatherAPI.getList();
-//                String todayTemp = String.format(Locale.getDefault(), "%.1f %s", list.get(0).getMain().getTemp(), unitSymbol);
-//                todaysTemp.setText(todayTemp);
-//
-//                for (int i = 0; i < list.size(); i += 8) {
-//                    String weekDayTemp = String.format(Locale.getDefault(), "%.1f %s", list.get(i).getMain().getTemp(), unitSymbol);
-//                    weekDaysTemp.add(weekDayTemp);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-//                super.onFailure(statusCode, headers, throwable, errorResponse);
-//            }
-//        });
 
-        RecyclerView recycler = findViewById(R.id.recycler_forecast);
-        ForecastRecyclerAdaptor adaptor = new ForecastRecyclerAdaptor(weekDaysTemp);
-        recycler.setAdapter(adaptor);
-        recycler.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        ForecastRecyclerAdapter adapter = new ForecastRecyclerAdapter(weekDaysTemp);
+        recyclerForcast.setAdapter(adapter);
+        recyclerForcast.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         Log.d("Activity", "Created");
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("Activity", "Started");
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("Activity", "Resumed");
-    }
 }
