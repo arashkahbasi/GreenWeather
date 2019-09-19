@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="unitBackground">#8BC34A</color>
+    <color name="colorTempNight">#398A87</color>
+    <color name="colorTempDay">#2A80Cf</color>
 
 </resources>

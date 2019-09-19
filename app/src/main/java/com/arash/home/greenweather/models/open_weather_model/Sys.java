@@ -1,5 +1,5 @@
 
-package com.arash.home.greenweather.openweathermap_api_pojos;
+package com.arash.home.greenweather.models.open_weather_model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,10 +1,10 @@
 
-package com.arash.home.greenweather.openweathermap_api_pojos;
+package com.arash.home.greenweather.models.open_weather_model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WeatherAPI {
+public class WeatherModel {
 
     @SerializedName("cod")
     @Expose
@@ -17,7 +17,7 @@ public class WeatherAPI {
     private Integer cnt;
     @SerializedName("list")
     @Expose
-    private java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> list = null;
+    private java.util.List<List> list = null;
     @SerializedName("city")
     @Expose
     private City city;
@@ -46,11 +46,11 @@ public class WeatherAPI {
         this.cnt = cnt;
     }
 
-    public java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> getList() {
+    public java.util.List<List> getList() {
         return list;
     }
 
-    public void setList(java.util.List<com.arash.home.greenweather.openweathermap_api_pojos.List> list) {
+    public void setList(java.util.List<List> list) {
         this.list = list;
     }
 

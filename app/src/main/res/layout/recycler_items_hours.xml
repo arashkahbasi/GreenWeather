@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#00FFFFFF"
+    android:orientation="vertical"
+    android:padding="@dimen/_2sdp"
+    tools:context=".weather_contract.weather_views.WeatherHomeActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_weather_icon"
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tv_degree"
+        app:layout_constraintRight_toRightOf="@id/tv_degree"
+        app:layout_constraintTop_toBottomOf="@id/tv_degree"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_degree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:text="23°"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:background="@color/colorTempDay" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:layout_marginTop="@dimen/_28sdp"
+        android:text="11am"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/tv_degree"
+        app:layout_constraintRight_toRightOf="@id/tv_degree"
+        app:layout_constraintTop_toBottomOf="@id/tv_degree"
+        app:layout_constraintVertical_bias="0.0"
+        tools:background="@color/colorTempDay" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
