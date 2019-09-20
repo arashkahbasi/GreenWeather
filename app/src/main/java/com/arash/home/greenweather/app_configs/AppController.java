@@ -55,10 +55,10 @@ public class AppController extends CoreAppController {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
-    public static void setCityName(int cityName) {
+    public static void setCityName(String cityName) {
         Hawk.put(BasicConfigs.CITY, cityName);
     }
-    public static int getCityName() {
+    public static String getCityName() {
         return Hawk.get(BasicConfigs.CITY);
     }
 

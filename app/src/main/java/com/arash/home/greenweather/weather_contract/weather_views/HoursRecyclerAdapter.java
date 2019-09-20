@@ -41,7 +41,7 @@ public class HoursRecyclerAdapter extends RecyclerView.Adapter<HoursRecyclerAdap
 
     @Override
     public void onBindViewHolder(@NonNull HoursViewHolder holder, int position) {
-        String todayTemp = String.format(Locale.getDefault(), "%.0f %s", weatherList.get(position).getMain().getTemp(), BasicConfigs.METRIC_SYMBOL);
+        String todayTemp = String.format(Locale.getDefault(), "%.0f%s", weatherList.get(position).getMain().getTemp(), WeatherHomeActivity.unitSymbol);
         holder.tvDegree.setText(todayTemp);
         String s = weatherList.get(position).getDtTxt();
         String hour = "" + s.charAt(11) + s.charAt(12);
@@ -60,18 +60,22 @@ public class HoursRecyclerAdapter extends RecyclerView.Adapter<HoursRecyclerAdap
         switch (weatherList.get(position).getWeather().get(0).getId()) {
             case 800:
                 Glide.with(context).load(R.drawable.ic_sunny).into(holder.ivWeatherIcon);
+                break;
             case 804:
                 Glide.with(context).load(R.drawable.ic_cloudy).into(holder.ivWeatherIcon);
+                break;
             case 500:
                 Glide.with(context).load(R.drawable.ic_rainy).into(holder.ivWeatherIcon);
+                break;
             default:
                 Glide.with(context).load(R.drawable.ic_sunny_cloudy).into(holder.ivWeatherIcon);
+                break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return weatherList.size();
     }
 
     class HoursViewHolder extends RecyclerView.ViewHolder {

@@ -2,5 +2,9 @@
     <string name="app_name">Green Weather</string>
     <string name="city_prompt">Choose a City</string>
     <string name="unit_prompt">Choose a Preferred Unit</string>
+    <string-array name="unit_spinner">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
 
 </resources>

@@ -52,7 +52,7 @@ public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapte
 
     @Override
     public int getItemCount() {
-        return 5;
+        return segregatedWeatherForDays.size();
     }
 
     class DaysViewHolder extends RecyclerView.ViewHolder {
